@@ -29,12 +29,12 @@
 		private void InitializeComponent()
 		{
 			this.panelBack = new System.Windows.Forms.Panel();
+			this.btnEmployees = new System.Windows.Forms.Button();
+			this.btnPositions = new System.Windows.Forms.Button();
 			this.btnTickets = new System.Windows.Forms.Button();
 			this.btnAttractions = new System.Windows.Forms.Button();
 			this.panelUp = new System.Windows.Forms.Panel();
 			this.buttonClose = new System.Windows.Forms.Button();
-			this.btnPositions = new System.Windows.Forms.Button();
-			this.btnEmployees = new System.Windows.Forms.Button();
 			this.panelBack.SuspendLayout();
 			this.panelUp.SuspendLayout();
 			this.SuspendLayout();
@@ -54,6 +54,36 @@
 			this.panelBack.Name = "panelBack";
 			this.panelBack.Size = new System.Drawing.Size(957, 593);
 			this.panelBack.TabIndex = 6;
+			// 
+			// btnEmployees
+			// 
+			this.btnEmployees.BackColor = System.Drawing.Color.Transparent;
+			this.btnEmployees.FlatAppearance.BorderSize = 0;
+			this.btnEmployees.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.btnEmployees.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.btnEmployees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnEmployees.Location = new System.Drawing.Point(143, 191);
+			this.btnEmployees.Name = "btnEmployees";
+			this.btnEmployees.Size = new System.Drawing.Size(170, 37);
+			this.btnEmployees.TabIndex = 7;
+			this.btnEmployees.UseVisualStyleBackColor = false;
+			this.btnEmployees.MouseLeave += new System.EventHandler(this.btnAttractions_MouseLeave);
+			this.btnEmployees.MouseHover += new System.EventHandler(this.btnEmployees_MouseHover);
+			// 
+			// btnPositions
+			// 
+			this.btnPositions.BackColor = System.Drawing.Color.Transparent;
+			this.btnPositions.FlatAppearance.BorderSize = 0;
+			this.btnPositions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.btnPositions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.btnPositions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnPositions.Location = new System.Drawing.Point(265, 112);
+			this.btnPositions.Name = "btnPositions";
+			this.btnPositions.Size = new System.Drawing.Size(170, 37);
+			this.btnPositions.TabIndex = 6;
+			this.btnPositions.UseVisualStyleBackColor = false;
+			this.btnPositions.MouseLeave += new System.EventHandler(this.btnAttractions_MouseLeave);
+			this.btnPositions.MouseHover += new System.EventHandler(this.btnPositions_MouseHover);
 			// 
 			// btnTickets
 			// 
@@ -82,6 +112,7 @@
 			this.btnAttractions.Size = new System.Drawing.Size(170, 37);
 			this.btnAttractions.TabIndex = 4;
 			this.btnAttractions.UseVisualStyleBackColor = false;
+			this.btnAttractions.Click += new System.EventHandler(this.btnAttractions_Click);
 			this.btnAttractions.MouseLeave += new System.EventHandler(this.btnAttractions_MouseLeave);
 			this.btnAttractions.MouseHover += new System.EventHandler(this.btnAttractions_MouseHover);
 			// 
@@ -112,36 +143,6 @@
 			this.buttonClose.TabIndex = 0;
 			this.buttonClose.UseVisualStyleBackColor = true;
 			this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-			// 
-			// btnPositions
-			// 
-			this.btnPositions.BackColor = System.Drawing.Color.Transparent;
-			this.btnPositions.FlatAppearance.BorderSize = 0;
-			this.btnPositions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.btnPositions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.btnPositions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnPositions.Location = new System.Drawing.Point(265, 112);
-			this.btnPositions.Name = "btnPositions";
-			this.btnPositions.Size = new System.Drawing.Size(170, 37);
-			this.btnPositions.TabIndex = 6;
-			this.btnPositions.UseVisualStyleBackColor = false;
-			this.btnPositions.MouseLeave += new System.EventHandler(this.btnAttractions_MouseLeave);
-			this.btnPositions.MouseHover += new System.EventHandler(this.btnPositions_MouseHover);
-			// 
-			// btnEmployees
-			// 
-			this.btnEmployees.BackColor = System.Drawing.Color.Transparent;
-			this.btnEmployees.FlatAppearance.BorderSize = 0;
-			this.btnEmployees.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.btnEmployees.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.btnEmployees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnEmployees.Location = new System.Drawing.Point(143, 191);
-			this.btnEmployees.Name = "btnEmployees";
-			this.btnEmployees.Size = new System.Drawing.Size(170, 37);
-			this.btnEmployees.TabIndex = 7;
-			this.btnEmployees.UseVisualStyleBackColor = false;
-			this.btnEmployees.MouseLeave += new System.EventHandler(this.btnAttractions_MouseLeave);
-			this.btnEmployees.MouseHover += new System.EventHandler(this.btnEmployees_MouseHover);
 			// 
 			// AdminForm
 			// 

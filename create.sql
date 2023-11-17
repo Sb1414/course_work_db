@@ -1,20 +1,20 @@
 CREATE TABLE UserCredentials (
     Id SERIAL PRIMARY KEY,
-    Login TEXT NOT NULL UNIQUE,
-    Password TEXT NOT NULL
+    Login VARCHAR NOT NULL UNIQUE,
+    Password VARCHAR NOT NULL
 );
 
 CREATE TABLE Attractions (
      id SERIAL PRIMARY KEY,
-     Name TEXT NOT NULL,
-     Description TEXT NOT NULL,
+     Name VARCHAR NOT NULL,
+     Description VARCHAR NOT NULL,
      Capacity INTEGER NOT NULL,
      TicketPrice INTEGER NOT NULL
 );
 
 CREATE TABLE Positions (
     Id SERIAL PRIMARY KEY,
-    Position TEXT NOT NULL,
+    Position VARCHAR NOT NULL,
     Salary INTEGER NOT NULL,
     Count INTEGER NOT NULL
 );
@@ -25,6 +25,16 @@ CREATE TABLE Tickets (
     AttractionID INTEGER NOT NULL,
     FOREIGN KEY (AttractionID) REFERENCES Attractions(id)
 );
+
+ALTER TABLE tickets
+    DROP CONSTRAINT IF EXISTS tickets_attractionid_fkey;
+
+ALTER TABLE tickets
+    ADD CONSTRAINT tickets_attractionid_fkey
+        FOREIGN KEY (AttractionID)
+            REFERENCES Attractions(id)
+            ON DELETE CASCADE;
+
 
 CREATE TABLE TicketAttractions (
     TicketId INTEGER NOT NULL,
@@ -38,8 +48,9 @@ CREATE TABLE TicketAttractions (
 CREATE TABLE Employees (
     Id SERIAL PRIMARY KEY,
     UserCredentialId INTEGER NOT NULL,
-    FirstName TEXT NOT NULL,
-    LastName TEXT NOT NULL,
+    FirstName VARCHAR NOT NULL,
+    LastName VARCHAR NOT NULL,
+    MiddleName VARCHAR NOT NULL,
     DateOfBirth DATE NOT NULL,
     PositionID INTEGER NOT NULL,
     

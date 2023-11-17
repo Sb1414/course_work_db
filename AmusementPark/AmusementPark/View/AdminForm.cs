@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace AmusementPark
 {
 	public partial class AdminForm : Form
 	{
+		string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 		public AdminForm()
 		{
 			InitializeComponent();
@@ -60,6 +62,12 @@ namespace AmusementPark
 		private void btnEmployees_MouseHover(object sender, EventArgs e)
 		{
 			panelBack.BackgroundImage = Properties.Resources.admin_employees;
+		}
+
+		private void btnAttractions_Click(object sender, EventArgs e)
+		{
+			AttractionsForm attractions = new AttractionsForm(connectionString);
+			attractions.Show();
 		}
 	}
 }
