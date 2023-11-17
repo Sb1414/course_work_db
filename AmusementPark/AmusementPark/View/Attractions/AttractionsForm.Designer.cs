@@ -121,20 +121,23 @@
 			// btnSortOnName
 			// 
 			this.btnSortOnName.Name = "btnSortOnName";
-			this.btnSortOnName.Size = new System.Drawing.Size(207, 26);
+			this.btnSortOnName.Size = new System.Drawing.Size(224, 26);
 			this.btnSortOnName.Text = "По названию";
+			this.btnSortOnName.Click += new System.EventHandler(this.btnSortOnName_Click);
 			// 
 			// btnSortOnPrice
 			// 
 			this.btnSortOnPrice.Name = "btnSortOnPrice";
-			this.btnSortOnPrice.Size = new System.Drawing.Size(207, 26);
+			this.btnSortOnPrice.Size = new System.Drawing.Size(224, 26);
 			this.btnSortOnPrice.Text = "По цене";
+			this.btnSortOnPrice.Click += new System.EventHandler(this.btnSortOnPrice_Click);
 			// 
 			// btnSortOnCapacity
 			// 
 			this.btnSortOnCapacity.Name = "btnSortOnCapacity";
-			this.btnSortOnCapacity.Size = new System.Drawing.Size(207, 26);
+			this.btnSortOnCapacity.Size = new System.Drawing.Size(224, 26);
 			this.btnSortOnCapacity.Text = "По вместимости";
+			this.btnSortOnCapacity.Click += new System.EventHandler(this.btnSortOnCapacity_Click);
 			// 
 			// panelUp
 			// 

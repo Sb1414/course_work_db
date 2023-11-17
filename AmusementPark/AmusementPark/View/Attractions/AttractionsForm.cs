@@ -225,5 +225,38 @@ namespace AmusementPark
 				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
 			}
 		}
+
+		private void btnSortOnName_Click(object sender, EventArgs e)
+		{
+			if (dataGridViewAttractions.DataSource is DataTable dataTable && dataTable.Rows.Count > 0)
+			{
+				DataView dataView = new DataView(dataTable);
+
+				dataView.Sort = "Name ASC";
+				dataGridViewAttractions.DataSource = dataView;
+			}
+		}
+
+		private void btnSortOnPrice_Click(object sender, EventArgs e)
+		{
+			if (dataGridViewAttractions.DataSource is DataTable dataTable && dataTable.Rows.Count > 0)
+			{
+				DataView dataView = new DataView(dataTable);
+
+				dataView.Sort = "TicketPrice ASC";
+				dataGridViewAttractions.DataSource = dataView;
+			}
+		}
+
+		private void btnSortOnCapacity_Click(object sender, EventArgs e)
+		{
+			if (dataGridViewAttractions.DataSource is DataTable dataTable && dataTable.Rows.Count > 0)
+			{
+				DataView dataView = new DataView(dataTable);
+
+				dataView.Sort = "Capacity ASC";
+				dataGridViewAttractions.DataSource = dataView;
+			}
+		}
 	}
 }

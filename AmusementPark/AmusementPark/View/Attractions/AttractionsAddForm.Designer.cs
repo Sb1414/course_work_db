@@ -150,6 +150,7 @@
 			this.Controls.Add(this.panelBack);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "AttractionsAddForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "AttrationsAddForm";
 			this.panelBack.ResumeLayout(false);
 			this.panelBack.PerformLayout();
