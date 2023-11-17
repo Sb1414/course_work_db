@@ -103,6 +103,38 @@ namespace AmusementPark
 			return false;
 		}
 
+		private string GetPositionByLogin(string username, string password)
+		{
+			using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+			{
+				try
+				{
+					connection.Open();
+					Console.WriteLine("Connected to PostgreSQL");
+
+					string query = "SELECT p.Position " +
+								   "FROM UserCredentials uc " +
+								   "JOIN Employees e ON uc.Id = e.UserCredentialId " +
+								   "JOIN Positions p ON e.PositionID = p.Id " +
+								   "WHERE uc.Login = @Username AND uc.Password = @Password";
+
+					using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@Username", username);
+						command.Parameters.AddWithValue("@Password", password);
+
+						string position = command.ExecuteScalar() as string;
+						return position;
+					}
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine($"Error: {ex.Message}");
+					return null;
+				}
+			}
+		}
+
 		private void btnLogin_Click(object sender, EventArgs e)
 		{
 			string username = textBoxLogin.Text;
@@ -119,7 +151,24 @@ namespace AmusementPark
 			switch (loginStatus)
 			{
 				case LoginStatus.Success:
-					labelInfo.Text = "ок";
+					string position = GetPositionByLogin(username, password).ToLower();
+
+					if (position != null)
+					{
+						switch (position)
+						{
+							case "администратор":
+							case "директор":
+								AdminForm adminForm = new AdminForm();
+								adminForm.Show();
+								break;
+
+							default:
+								BaseForm baseForm = new BaseForm();
+								baseForm.Show();
+								break;
+						}
+					}
 					break;
 
 				case LoginStatus.InvalidUsername:
