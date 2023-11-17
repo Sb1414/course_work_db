@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,29 +15,11 @@ namespace AmusementPark
 	public partial class Form1 : Form
 	{
 		string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+		bool passVisible = false;
 		public Form1()
 		{
 			InitializeComponent();
-			LoadUserData();
-		}
-
-		private void LoadUserData()
-		{
-			using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-			{
-				connection.Open();
-
-				string query = "SELECT * FROM Employees";
-
-				using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(query, connection))
-				{
-					DataTable dataTable = new DataTable();
-					adapter.Fill(dataTable);
-
-					// Assuming you have a DataGridView named dataGridView1 on your form
-					dataGridView1.DataSource = dataTable;
-				}
-			}
+			textBoxPassword.PasswordChar = '●';
 		}
 
 		private void buttonClose_Click(object sender, EventArgs e)
@@ -61,29 +42,14 @@ namespace AmusementPark
 			lastPoint = new Point(e.X, e.Y);
 		}
 
-		private void btnLogin_Click(object sender, EventArgs e)
-		{
-			string username = textBoxLogin.Text;
-			string password = textBoxPassword.Text;
-
-			if (IsValidLogin(username, password))
-			{
-				MessageBox.Show("Login successful!");
-			}
-			else
-			{
-				MessageBox.Show("Invalid login credentials. Please try again.");
-			}
-		}
-
-		private bool IsValidLogin(string username, string password)
+		private LoginStatus IsValidLogin(string username, string password)
 		{
 			using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
 			{
 				try
 				{
 					connection.Open();
-					Console.WriteLine("Connected to PostgreSQL database!");
+					Console.WriteLine("Connected to PostgreSQL");
 
 					string query = "SELECT COUNT(*) FROM UserCredentials WHERE Login = @Username AND Password = @Password";
 					using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
@@ -91,15 +57,82 @@ namespace AmusementPark
 						command.Parameters.AddWithValue("@Username", username);
 						command.Parameters.AddWithValue("@Password", password);
 
-						int count = (int)command.ExecuteScalar();
-						return count > 0;
+						int count = Convert.ToInt32(command.ExecuteScalar());
+
+						if (count > 0)
+						{
+							return LoginStatus.Success;
+						}
+						else if (UserExists(username))
+						{
+							return LoginStatus.InvalidPassword;
+						}
+						else
+						{
+							return LoginStatus.InvalidUsername;
+						}
 					}
 				}
 				catch (Exception ex)
 				{
 					Console.WriteLine($"Error: {ex.Message}");
-					return false; // Return false in case of an exception
+					return LoginStatus.Failure;
 				}
+			}
+		}
+
+		private bool UserExists(string username)
+		{
+			using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+			{				
+				connection.Open();
+
+				string query = "SELECT COUNT(*) FROM UserCredentials WHERE Login = @Username";
+				using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@Username", username);
+
+					int count = Convert.ToInt32(command.ExecuteScalar());
+
+					if (count > 0)
+					{
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		private void btnLogin_Click(object sender, EventArgs e)
+		{
+			string username = textBoxLogin.Text;
+			string password = textBoxPassword.Text;
+
+			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+			{
+				labelInfo.Text = "Введите логин и пароль";
+				return;
+			}
+
+			LoginStatus loginStatus = IsValidLogin(username, password);
+
+			switch (loginStatus)
+			{
+				case LoginStatus.Success:
+					labelInfo.Text = "ок";
+					break;
+
+				case LoginStatus.InvalidUsername:
+					labelInfo.Text = "Пользователя не существует";
+					break;
+
+				case LoginStatus.InvalidPassword:
+					labelInfo.Text = "Неверный пароль";
+					break;
+
+				case LoginStatus.Failure:
+					labelInfo.Text = "Ошибка";
+					break;
 			}
 		}
 
@@ -108,6 +141,7 @@ namespace AmusementPark
 		{
 			string currentText = textBoxLogin.Text;
 			string filteredText = new string(currentText.Where(c => Char.IsLetterOrDigit(c)).ToArray());
+			labelInfo.Text = "";
 
 			textBoxLogin.Text = filteredText;
 			textBoxLogin.SelectionStart = textBoxLogin.Text.Length;
@@ -115,8 +149,27 @@ namespace AmusementPark
 
 		private void btnClear_Click(object sender, EventArgs e)
 		{
+			labelInfo.Text = "";
 			textBoxLogin.Clear();
 			textBoxPassword.Clear();
+		}
+
+		private void textBoxPassword_TextChanged(object sender, EventArgs e)
+		{
+			labelInfo.Text = "";
+		}
+
+		private void btnCheckPass_Click(object sender, EventArgs e)
+		{
+			if (passVisible)
+			{
+				passVisible = false;
+				textBoxPassword.PasswordChar = '●';
+			} else
+			{
+				passVisible = true;
+				textBoxPassword.PasswordChar = '\0';
+			}
 		}
 	}
 }
