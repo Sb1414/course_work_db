@@ -36,5 +36,30 @@ namespace AmusementPark
 		{
 			lastPoint = new Point(e.X, e.Y);
 		}
+
+		private void btnAttractions_MouseHover(object sender, EventArgs e)
+		{
+			panelBack.BackgroundImage = Properties.Resources.admin_attraction;
+		}
+
+		private void btnAttractions_MouseLeave(object sender, EventArgs e)
+		{
+			panelBack.BackgroundImage = Properties.Resources.admin_back;
+		}
+
+		private void btnTickets_MouseHover(object sender, EventArgs e)
+		{
+			panelBack.BackgroundImage = Properties.Resources.admin_tickets;
+		}
+
+		private void btnPositions_MouseHover(object sender, EventArgs e)
+		{
+			panelBack.BackgroundImage = Properties.Resources.admin_position;
+		}
+
+		private void btnEmployees_MouseHover(object sender, EventArgs e)
+		{
+			panelBack.BackgroundImage = Properties.Resources.admin_employees;
+		}
 	}
 }
