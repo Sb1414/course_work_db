@@ -29,11 +29,23 @@ CREATE TABLE Tickets (
 ALTER TABLE tickets
     DROP CONSTRAINT IF EXISTS tickets_attractionid_fkey;
 
-ALTER TABLE tickets
-    ADD CONSTRAINT tickets_attractionid_fkey
-        FOREIGN KEY (AttractionID)
-            REFERENCES Attractions(id)
-            ON DELETE CASCADE;
+-- Удаление таблицы
+DROP TABLE IF EXISTS tickets;
+
+-- Создание таблицы заново
+CREATE TABLE Tickets (
+    Id SERIAL PRIMARY KEY,
+    PurchaseDate DATE NOT NULL,
+    AttractionID INTEGER NOT NULL,
+    FOREIGN KEY (AttractionID) REFERENCES Attractions(id) ON DELETE CASCADE
+);
+
+-- 
+-- ALTER TABLE tickets
+--     ADD CONSTRAINT tickets_attractionid_fkey
+--         FOREIGN KEY (AttractionID)
+--             REFERENCES Attractions(id)
+--             ON DELETE CASCADE;
 
 
 CREATE TABLE TicketAttractions (

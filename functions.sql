@@ -61,3 +61,20 @@ CREATE OR REPLACE TRIGGER check_position_count
     BEFORE INSERT ON Employees
     FOR EACH ROW
 EXECUTE PROCEDURE check_position_count();
+
+-- функция на удаление аттракционов, чтобы удалялись данные из таблицы билетов
+CREATE OR REPLACE FUNCTION delete_tickets_on_attraction_delete()
+    RETURNS TRIGGER AS $$
+BEGIN
+    DELETE FROM TicketAttractions WHERE AttractionID = OLD.id;
+    DELETE FROM TicketSales WHERE TicketId IN (SELECT Id FROM Tickets WHERE AttractionID = OLD.id);
+    DELETE FROM Tickets WHERE AttractionID = OLD.id;
+
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER trg_delete_tickets_on_attraction_delete
+    BEFORE DELETE ON Attractions
+    FOR EACH ROW
+EXECUTE FUNCTION delete_tickets_on_attraction_delete();
