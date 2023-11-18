@@ -93,6 +93,16 @@ namespace AmusementPark.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add_tickets_form {
+            get {
+                object obj = ResourceManager.GetObject("add tickets form", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap admin_attraction {
             get {
                 object obj = ResourceManager.GetObject("admin_attraction", resourceCulture);
@@ -216,6 +226,16 @@ namespace AmusementPark.Properties {
         internal static System.Drawing.Bitmap positions1 {
             get {
                 object obj = ResourceManager.GetObject("positions1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tickets {
+            get {
+                object obj = ResourceManager.GetObject("tickets", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,4 +1,6 @@
-﻿using Npgsql;
+﻿using AmusementPark.View.Employees;
+using AmusementPark.View.Tickets;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,10 +58,11 @@ namespace AmusementPark.View
 		{
 			try
 			{
-				string query = "SELECT TicketSales.TicketId, P.Position, CONCAT(E.LastName, ' ', E.FirstName, ' ', E.MiddleName) AS Employee, SaleTime FROM TicketSales " +
-								"JOIN Employees E on E.Id = TicketSales.EmployeeId " +
-								"JOIN Tickets T on T.Id = TicketSales.TicketId " +
-								"JOIN Positions P on P.Id = E.PositionID WHERE E.PositionID > 3";
+				string query = @"SELECT Tickets.Id AS TicketId, P.Position, 
+								CONCAT(E.LastName, ' ', E.FirstName, ' ', E.MiddleName) AS Employee, PurchaseDate FROM Tickets
+														JOIN Employees E on E.Id = Tickets.EmployeeId 
+                                                        JOIN Positions P on P.Id = E.PositionID
+                                                        WHERE E.PositionID > 3";
 
 				using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
 				{
@@ -93,7 +96,7 @@ namespace AmusementPark.View
 			dataGridViewTickets.Columns["TicketId"].Visible = false;
 			dataGridViewTickets.Columns["Position"].HeaderText = "Должность";
 			dataGridViewTickets.Columns["Employee"].HeaderText = "Сотрудник";
-			dataGridViewTickets.Columns["SaleTime"].HeaderText = "Время продажи";
+			dataGridViewTickets.Columns["PurchaseDate"].HeaderText = "Дата продажи";
 		}
 
 		private void NamesAttractionsColumns()
@@ -151,13 +154,10 @@ namespace AmusementPark.View
 			{
 				connection.Open();
 
-				string query = $@"SELECT TicketSales.TicketId, P.Position, 
-										CONCAT(E.LastName, ' ', E.FirstName, ' ', E.MiddleName) AS Employee, 
-										SaleTime FROM TicketSales
-										JOIN Employees E on E.Id = TicketSales.EmployeeId 
-										JOIN Tickets T on T.Id = TicketSales.TicketId
-										JOIN Positions P on P.Id = E.PositionID 
-												 WHERE E.PositionID > 3
+				string query = $@"SELECT Tickets.Id AS TicketId, P.Position, CONCAT(E.LastName, ' ', E.FirstName, ' ', E.MiddleName) AS Employee, PurchaseDate FROM Tickets
+									JOIN Employees E on E.Id = Tickets.EmployeeId
+									JOIN Positions P on P.Id = E.PositionID
+									WHERE E.PositionID > 3 
 									AND {field} ILIKE @searchText";
 
 				if (!string.IsNullOrEmpty(searchText))
@@ -188,5 +188,140 @@ namespace AmusementPark.View
 				}
 			}
 		}
+
+		private void btnInsert_Click(object sender, EventArgs e)
+		{
+			TicketsAddForm addForm = new TicketsAddForm(connectionString);
+
+			if (addForm.ShowDialog() == DialogResult.OK)
+			{
+				int emplId = addForm.EmployeeId;
+				int atrId = addForm.AttractionId;
+				DateTime addDate = addForm.PurchaseDate;
+
+				using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+				{
+					try
+					{
+						connection.Open();
+
+						string ticketsQuery = "INSERT INTO Tickets (EmployeeId, PurchaseDate) VALUES (@EmployeeId, @PurchaseDate)";
+						using (NpgsqlCommand ticketsCommand = new NpgsqlCommand(ticketsQuery, connection))
+						{
+							ticketsCommand.Parameters.AddWithValue("@EmployeeId", emplId);
+							ticketsCommand.Parameters.AddWithValue("@PurchaseDate", addDate);
+							ticketsCommand.ExecuteNonQuery();
+						}						
+
+						string getIdQuery = "SELECT lastval()";
+						using (NpgsqlCommand getIdCommand = new NpgsqlCommand(getIdQuery, connection))
+						{
+							int TicketId = Convert.ToInt32(getIdCommand.ExecuteScalar());
+
+							string ticketAttractionsQuery = "INSERT INTO TicketAttractions (TicketId, AttractionId) VALUES (@TicketId, @AttractionId)";
+							
+							using (NpgsqlCommand ticketAttractionsCommand = new NpgsqlCommand(ticketAttractionsQuery, connection))
+							{
+								ticketAttractionsCommand.Parameters.AddWithValue("@TicketId", TicketId);
+								ticketAttractionsCommand.Parameters.AddWithValue("@AttractionId", atrId);								
+								int rowsAffected = ticketAttractionsCommand.ExecuteNonQuery();
+								if (rowsAffected > 0)
+								{
+									LoadTickets();
+								}
+								else
+								{
+									MessageBox.Show("Не удалось добавить данные");
+								}
+							}
+
+						}
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine($"Error: {ex.Message}");
+					}
+				}
+			}
+		}
+		private Tuple<int, int> GetEmployeeAndAttractionIds(int ticketId)
+		{
+			using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+			{
+				connection.Open();
+
+				string query = "SELECT EmployeeId, AttractionId FROM TicketAttractions " +
+					"JOIN Tickets T on TicketAttractions.TicketId = T.Id" +
+					" WHERE TicketId = @TicketId";
+
+				using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@TicketId", ticketId);
+
+					using (NpgsqlDataReader reader = command.ExecuteReader())
+					{
+						if (reader.Read())
+						{
+							int employeeId = reader.GetInt32(0);
+							int attractionId = reader.GetInt32(1);
+							return Tuple.Create(employeeId, attractionId);
+						}
+					}
+				}
+			}
+			return null;
+		}
+
+		private void addAttraction_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewTickets.CurrentRow == null)
+				{
+					throw new Exception("Не выбран билет");
+				}
+
+				string employee = dataGridViewTickets.CurrentRow.Cells["Employee"].Value?.ToString();
+				int id = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["TicketId"].Value);
+				DateTime date = Convert.ToDateTime(dataGridViewTickets.CurrentRow.Cells["PurchaseDate"].Value);
+				Tuple<int, int> result = GetEmployeeAndAttractionIds(id);
+
+				TicketsAddForm addForm = new TicketsAddForm(connectionString, result, date, false);
+				if (addForm.ShowDialog() == DialogResult.OK)
+				{
+					int atrId = addForm.AttractionId;
+					DateTime addDate = addForm.PurchaseDate;
+
+					using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+					{
+						connection.Open();
+
+						string ticketAttractionsQuery = "INSERT INTO TicketAttractions (TicketId, AttractionId) VALUES (@TicketId, @AttractionId)";
+
+						using (NpgsqlCommand ticketAttractionsCommand = new NpgsqlCommand(ticketAttractionsQuery, connection))
+						{
+							ticketAttractionsCommand.Parameters.AddWithValue("@TicketId", id);
+							ticketAttractionsCommand.Parameters.AddWithValue("@AttractionId", atrId);
+							int rowsAffected = ticketAttractionsCommand.ExecuteNonQuery();
+							if (rowsAffected > 0)
+							{
+								LoadTickets();
+							}
+							else
+							{
+								MessageBox.Show("Не удалось добавить данные");
+							}
+						}
+
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
+			}
+		}
+
+
 	}
 }

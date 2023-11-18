@@ -23,9 +23,6 @@ namespace AmusementPark
 		{
 			InitializeComponent();
 			textBoxPassword.PasswordChar = '●';
-
-			TicketsForm tickets = new TicketsForm(connectionString);
-			tickets.Show();
 		}
 
 		private void buttonClose_Click(object sender, EventArgs e)

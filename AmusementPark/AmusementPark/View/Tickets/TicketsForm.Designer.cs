@@ -29,21 +29,22 @@
 		private void InitializeComponent()
 		{
 			this.panelBack = new System.Windows.Forms.Panel();
+			this.comboBoxColumns = new System.Windows.Forms.ComboBox();
 			this.panelForTable = new System.Windows.Forms.Panel();
 			this.dataGridViewAttractions = new System.Windows.Forms.DataGridView();
 			this.dataGridViewTickets = new System.Windows.Forms.DataGridView();
+			this.textBoxSearch = new System.Windows.Forms.TextBox();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.btnInsert = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnUpdate = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnDelete = new System.Windows.Forms.ToolStripMenuItem();
+			this.addAttraction = new System.Windows.Forms.ToolStripMenuItem();
 			this.sort = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnSortOnName = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnSortOnPrice = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnSortOnCapacity = new System.Windows.Forms.ToolStripMenuItem();
 			this.panelUp = new System.Windows.Forms.Panel();
 			this.buttonClose = new System.Windows.Forms.Button();
-			this.comboBoxColumns = new System.Windows.Forms.ComboBox();
-			this.textBoxSearch = new System.Windows.Forms.TextBox();
 			this.panelBack.SuspendLayout();
 			this.panelForTable.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewAttractions)).BeginInit();
@@ -55,6 +56,7 @@
 			// panelBack
 			// 
 			this.panelBack.BackColor = System.Drawing.Color.Transparent;
+			this.panelBack.BackgroundImage = global::AmusementPark.Properties.Resources.tickets;
 			this.panelBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.panelBack.Controls.Add(this.comboBoxColumns);
 			this.panelBack.Controls.Add(this.panelForTable);
@@ -66,6 +68,17 @@
 			this.panelBack.Name = "panelBack";
 			this.panelBack.Size = new System.Drawing.Size(955, 609);
 			this.panelBack.TabIndex = 8;
+			// 
+			// comboBoxColumns
+			// 
+			this.comboBoxColumns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(242)))), ((int)(((byte)(250)))));
+			this.comboBoxColumns.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.comboBoxColumns.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.comboBoxColumns.FormattingEnabled = true;
+			this.comboBoxColumns.Location = new System.Drawing.Point(176, 513);
+			this.comboBoxColumns.Name = "comboBoxColumns";
+			this.comboBoxColumns.Size = new System.Drawing.Size(210, 24);
+			this.comboBoxColumns.TabIndex = 12;
 			// 
 			// panelForTable
 			// 
@@ -104,6 +117,17 @@
 			this.dataGridViewTickets.TabIndex = 5;
 			this.dataGridViewTickets.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTickets_CellClick);
 			// 
+			// textBoxSearch
+			// 
+			this.textBoxSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(242)))), ((int)(((byte)(250)))));
+			this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxSearch.Location = new System.Drawing.Point(412, 513);
+			this.textBoxSearch.Name = "textBoxSearch";
+			this.textBoxSearch.Size = new System.Drawing.Size(481, 20);
+			this.textBoxSearch.TabIndex = 11;
+			this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
+			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -111,6 +135,7 @@
             this.btnInsert,
             this.btnUpdate,
             this.btnDelete,
+            this.addAttraction,
             this.sort});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 27);
 			this.menuStrip1.Name = "menuStrip1";
@@ -121,20 +146,28 @@
 			// btnInsert
 			// 
 			this.btnInsert.Name = "btnInsert";
-			this.btnInsert.Size = new System.Drawing.Size(169, 24);
-			this.btnInsert.Text = "Добавить должность";
+			this.btnInsert.Size = new System.Drawing.Size(122, 24);
+			this.btnInsert.Text = "Создать билет";
+			this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
 			// 
 			// btnUpdate
 			// 
 			this.btnUpdate.Name = "btnUpdate";
-			this.btnUpdate.Size = new System.Drawing.Size(171, 24);
-			this.btnUpdate.Text = "Изменить должность";
+			this.btnUpdate.Size = new System.Drawing.Size(136, 24);
+			this.btnUpdate.Text = "Изменить билет";
 			// 
 			// btnDelete
 			// 
 			this.btnDelete.Name = "btnDelete";
-			this.btnDelete.Size = new System.Drawing.Size(158, 24);
-			this.btnDelete.Text = "Удалить должность";
+			this.btnDelete.Size = new System.Drawing.Size(123, 24);
+			this.btnDelete.Text = "Удалить билет";
+			// 
+			// addAttraction
+			// 
+			this.addAttraction.Name = "addAttraction";
+			this.addAttraction.Size = new System.Drawing.Size(230, 24);
+			this.addAttraction.Text = "Добавить аттракцион в билет";
+			this.addAttraction.Click += new System.EventHandler(this.addAttraction_Click);
 			// 
 			// sort
 			// 
@@ -192,28 +225,6 @@
 			this.buttonClose.UseVisualStyleBackColor = true;
 			this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
 			// 
-			// comboBoxColumns
-			// 
-			this.comboBoxColumns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(242)))), ((int)(((byte)(250)))));
-			this.comboBoxColumns.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.comboBoxColumns.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.comboBoxColumns.FormattingEnabled = true;
-			this.comboBoxColumns.Location = new System.Drawing.Point(146, 533);
-			this.comboBoxColumns.Name = "comboBoxColumns";
-			this.comboBoxColumns.Size = new System.Drawing.Size(210, 24);
-			this.comboBoxColumns.TabIndex = 12;
-			// 
-			// textBoxSearch
-			// 
-			this.textBoxSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(242)))), ((int)(((byte)(250)))));
-			this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxSearch.Location = new System.Drawing.Point(377, 533);
-			this.textBoxSearch.Name = "textBoxSearch";
-			this.textBoxSearch.Size = new System.Drawing.Size(430, 20);
-			this.textBoxSearch.TabIndex = 11;
-			this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
-			// 
 			// TicketsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -254,5 +265,6 @@
 		private System.Windows.Forms.DataGridView dataGridViewTickets;
 		private System.Windows.Forms.ComboBox comboBoxColumns;
 		private System.Windows.Forms.TextBox textBoxSearch;
+		private System.Windows.Forms.ToolStripMenuItem addAttraction;
 	}
 }

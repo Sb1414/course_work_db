@@ -154,6 +154,12 @@
     <Compile Include="View\Positions\PositionsForm.Designer.cs">
       <DependentUpon>PositionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Tickets\TicketsAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Tickets\TicketsAddForm.Designer.cs">
+      <DependentUpon>TicketsAddForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Tickets\TicketsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Positions\PositionsForm.resx">
       <DependentUpon>PositionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Tickets\TicketsAddForm.resx">
+      <DependentUpon>TicketsAddForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Tickets\TicketsForm.resx">
       <DependentUpon>TicketsForm.cs</DependentUpon>
@@ -261,6 +270,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\add employees form.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tickets.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add tickets form.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
