@@ -99,6 +99,7 @@
 			this.btnTickets.Size = new System.Drawing.Size(170, 37);
 			this.btnTickets.TabIndex = 5;
 			this.btnTickets.UseVisualStyleBackColor = false;
+			this.btnTickets.Click += new System.EventHandler(this.btnTickets_Click);
 			this.btnTickets.MouseLeave += new System.EventHandler(this.btnAttractions_MouseLeave);
 			this.btnTickets.MouseHover += new System.EventHandler(this.btnTickets_MouseHover);
 			// 

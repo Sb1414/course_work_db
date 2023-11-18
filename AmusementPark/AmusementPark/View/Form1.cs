@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AmusementPark.View;
 using AmusementPark.View.Employees;
 using AmusementPark.View.Positions;
 using Npgsql;
@@ -22,6 +23,9 @@ namespace AmusementPark
 		{
 			InitializeComponent();
 			textBoxPassword.PasswordChar = '●';
+
+			TicketsForm tickets = new TicketsForm(connectionString);
+			tickets.Show();
 		}
 
 		private void buttonClose_Click(object sender, EventArgs e)

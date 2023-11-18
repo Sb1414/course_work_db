@@ -154,6 +154,12 @@
     <Compile Include="View\Positions\PositionsForm.Designer.cs">
       <DependentUpon>PositionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Tickets\TicketsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Tickets\TicketsForm.Designer.cs">
+      <DependentUpon>TicketsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -185,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Positions\PositionsForm.resx">
       <DependentUpon>PositionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Tickets\TicketsForm.resx">
+      <DependentUpon>TicketsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
