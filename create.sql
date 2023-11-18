@@ -64,7 +64,7 @@ CREATE TABLE Employees (
     LastName VARCHAR NOT NULL,
     MiddleName VARCHAR NOT NULL,
     DateOfBirth DATE NOT NULL,
-    PositionID INTEGER NOT NULL,
+    PositionID INTEGER,
     
     FOREIGN KEY (UserCredentialId) REFERENCES UserCredentials(Id),
     FOREIGN KEY (PositionID) REFERENCES Positions(Id)

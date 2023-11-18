@@ -78,3 +78,17 @@ CREATE OR REPLACE TRIGGER trg_delete_tickets_on_attraction_delete
     BEFORE DELETE ON Attractions
     FOR EACH ROW
 EXECUTE FUNCTION delete_tickets_on_attraction_delete();
+
+-- Установка PositionID в NULL для сотрудников с удаляемой позицией
+CREATE OR REPLACE FUNCTION delete_position_trigger()
+    RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE Employees SET PositionID = NULL WHERE PositionID = OLD.Id;
+
+    IF NOT TG_OP = 'DELETE' THEN
+        DELETE FROM Positions WHERE Id = OLD.Id;
+    END IF;
+
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
