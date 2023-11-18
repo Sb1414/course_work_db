@@ -258,5 +258,38 @@ namespace AmusementPark
 				dataGridViewAttractions.DataSource = dataView;
 			}
 		}
+
+		private void textBoxSearch_TextChanged(object sender, EventArgs e)
+		{
+			string searchText = textBoxSearch.Text.Trim();
+			if (!string.IsNullOrEmpty(searchText))
+			{
+				using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+				{
+					connection.Open();
+
+					string query = "SELECT * FROM Attractions WHERE Name ILIKE @searchText";
+
+					using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@searchText", "%" + searchText + "%");
+
+						using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command))
+						{
+							DataTable attractionsTable = new DataTable();
+							adapter.Fill(attractionsTable);
+
+							dataGridViewAttractions.DataSource = attractionsTable;
+						}
+						NamesColumns();
+					}
+				}
+			}
+			else
+			{
+				LoadAttractions();
+			}
+		}
+
 	}
 }

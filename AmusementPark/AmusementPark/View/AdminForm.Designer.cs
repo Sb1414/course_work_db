@@ -82,6 +82,7 @@
 			this.btnPositions.Size = new System.Drawing.Size(170, 37);
 			this.btnPositions.TabIndex = 6;
 			this.btnPositions.UseVisualStyleBackColor = false;
+			this.btnPositions.Click += new System.EventHandler(this.btnPositions_Click);
 			this.btnPositions.MouseLeave += new System.EventHandler(this.btnAttractions_MouseLeave);
 			this.btnPositions.MouseHover += new System.EventHandler(this.btnPositions_MouseHover);
 			// 

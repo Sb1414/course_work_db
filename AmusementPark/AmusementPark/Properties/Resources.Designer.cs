@@ -73,6 +73,16 @@ namespace AmusementPark.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add_position_form {
+            get {
+                object obj = ResourceManager.GetObject("add position form", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap admin_attraction {
             get {
                 object obj = ResourceManager.GetObject("admin_attraction", resourceCulture);
@@ -123,6 +133,16 @@ namespace AmusementPark.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap attractions {
+            get {
+                object obj = ResourceManager.GetObject("attractions", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap attractions_back {
             get {
                 object obj = ResourceManager.GetObject("attractions_back", resourceCulture);
@@ -156,6 +176,16 @@ namespace AmusementPark.Properties {
         internal static System.Drawing.Bitmap icons8_macos_закрыть_20__1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8-macos-закрыть-20 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap positions {
+            get {
+                object obj = ResourceManager.GetObject("positions", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

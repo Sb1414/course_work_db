@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AmusementPark.View.Positions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -68,6 +69,12 @@ namespace AmusementPark
 		{
 			AttractionsForm attractions = new AttractionsForm(connectionString);
 			attractions.Show();
+		}
+
+		private void btnPositions_Click(object sender, EventArgs e)
+		{
+			PositionsForm positions = new PositionsForm(connectionString);
+			positions.Show();
 		}
 	}
 }

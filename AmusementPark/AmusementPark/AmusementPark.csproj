@@ -130,6 +130,18 @@
     <Compile Include="LoginStatus.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Positions\PositionsAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Positions\PositionsAddForm.Designer.cs">
+      <DependentUpon>PositionsAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Positions\PositionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Positions\PositionsForm.Designer.cs">
+      <DependentUpon>PositionsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +161,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Positions\PositionsAddForm.resx">
+      <DependentUpon>PositionsAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Positions\PositionsForm.resx">
+      <DependentUpon>PositionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -198,6 +216,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\add_atractions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\attractions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\positions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add position form.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AmusementPark.View.Positions;
 using Npgsql;
 
 namespace AmusementPark
@@ -184,7 +185,6 @@ namespace AmusementPark
 					break;
 			}
 		}
-
 
 		private void textBoxLogin_TextChanged(object sender, EventArgs e)
 		{
