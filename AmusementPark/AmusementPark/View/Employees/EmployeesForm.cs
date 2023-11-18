@@ -283,5 +283,79 @@ namespace AmusementPark.View.Employees
 				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
 			}
 		}
+
+		private void btnDelete_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewEmployees.CurrentRow == null)
+				{
+					throw new Exception("Не выбран сотрудник");
+				}
+
+				int id = Convert.ToInt32(dataGridViewEmployees.CurrentRow.Cells["id"].Value);
+				DialogResult res = MessageBox.Show("Точно удалить сотрудника?\n" +
+					"Все билеты связанные с сотрудником пропадут", "Предупреждение", MessageBoxButtons.OKCancel);
+				if (res == DialogResult.OK)
+				{
+					using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+					{
+						connection.Open();
+
+						using (NpgsqlCommand command = new NpgsqlCommand("DELETE FROM UserCredentials WHERE id = @id", connection))
+						{
+							command.Parameters.AddWithValue("@id", id);
+
+							int rowsUpdated = command.ExecuteNonQuery();
+							if (rowsUpdated > 0)
+							{
+								LoadEmployees();
+							}
+							else
+							{
+								MessageBox.Show("Ошибка удаления данных");
+							}
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
+			}
+		}
+
+		private void btnSortOnPosition_Click(object sender, EventArgs e)
+		{
+			if (dataGridViewEmployees.DataSource is DataTable dataTable && dataTable.Rows.Count > 0)
+			{
+				DataView dataView = new DataView(dataTable);
+
+				dataView.Sort = "Position ASC";
+				dataGridViewEmployees.DataSource = dataView;
+			}
+		}
+
+		private void btnSortOnLastName_Click(object sender, EventArgs e)
+		{
+			if (dataGridViewEmployees.DataSource is DataTable dataTable && dataTable.Rows.Count > 0)
+			{
+				DataView dataView = new DataView(dataTable);
+
+				dataView.Sort = "LastName ASC";
+				dataGridViewEmployees.DataSource = dataView;
+			}
+		}
+
+		private void btnSortOnLogin_Click(object sender, EventArgs e)
+		{
+			if (dataGridViewEmployees.DataSource is DataTable dataTable && dataTable.Rows.Count > 0)
+			{
+				DataView dataView = new DataView(dataTable);
+
+				dataView.Sort = "Login ASC";
+				dataGridViewEmployees.DataSource = dataView;
+			}
+		}
 	}
 }

@@ -37,9 +37,9 @@
 			this.btnUpdate = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.sort = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnSortOnName = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnSortOnPrice = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnSortOnCapacity = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnSortOnPosition = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnSortOnLastName = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnSortOnLogin = new System.Windows.Forms.ToolStripMenuItem();
 			this.panelUp = new System.Windows.Forms.Panel();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.panelBack.SuspendLayout();
@@ -132,34 +132,38 @@
 			this.btnDelete.Name = "btnDelete";
 			this.btnDelete.Size = new System.Drawing.Size(162, 24);
 			this.btnDelete.Text = "Удалить сотрудника";
+			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
 			// 
 			// sort
 			// 
 			this.sort.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSortOnName,
-            this.btnSortOnPrice,
-            this.btnSortOnCapacity});
+            this.btnSortOnPosition,
+            this.btnSortOnLastName,
+            this.btnSortOnLogin});
 			this.sort.Name = "sort";
 			this.sort.Size = new System.Drawing.Size(106, 24);
 			this.sort.Text = "Сортировка";
 			// 
-			// btnSortOnName
+			// btnSortOnPosition
 			// 
-			this.btnSortOnName.Name = "btnSortOnName";
-			this.btnSortOnName.Size = new System.Drawing.Size(193, 26);
-			this.btnSortOnName.Text = "По должности";
+			this.btnSortOnPosition.Name = "btnSortOnPosition";
+			this.btnSortOnPosition.Size = new System.Drawing.Size(224, 26);
+			this.btnSortOnPosition.Text = "По должности";
+			this.btnSortOnPosition.Click += new System.EventHandler(this.btnSortOnPosition_Click);
 			// 
-			// btnSortOnPrice
+			// btnSortOnLastName
 			// 
-			this.btnSortOnPrice.Name = "btnSortOnPrice";
-			this.btnSortOnPrice.Size = new System.Drawing.Size(193, 26);
-			this.btnSortOnPrice.Text = "По зарплате";
+			this.btnSortOnLastName.Name = "btnSortOnLastName";
+			this.btnSortOnLastName.Size = new System.Drawing.Size(224, 26);
+			this.btnSortOnLastName.Text = "По фамилии";
+			this.btnSortOnLastName.Click += new System.EventHandler(this.btnSortOnLastName_Click);
 			// 
-			// btnSortOnCapacity
+			// btnSortOnLogin
 			// 
-			this.btnSortOnCapacity.Name = "btnSortOnCapacity";
-			this.btnSortOnCapacity.Size = new System.Drawing.Size(193, 26);
-			this.btnSortOnCapacity.Text = "По количеству";
+			this.btnSortOnLogin.Name = "btnSortOnLogin";
+			this.btnSortOnLogin.Size = new System.Drawing.Size(224, 26);
+			this.btnSortOnLogin.Text = "По логину";
+			this.btnSortOnLogin.Click += new System.EventHandler(this.btnSortOnLogin_Click);
 			// 
 			// panelUp
 			// 
@@ -221,9 +225,9 @@
 		private System.Windows.Forms.ToolStripMenuItem btnUpdate;
 		private System.Windows.Forms.ToolStripMenuItem btnDelete;
 		private System.Windows.Forms.ToolStripMenuItem sort;
-		private System.Windows.Forms.ToolStripMenuItem btnSortOnName;
-		private System.Windows.Forms.ToolStripMenuItem btnSortOnPrice;
-		private System.Windows.Forms.ToolStripMenuItem btnSortOnCapacity;
+		private System.Windows.Forms.ToolStripMenuItem btnSortOnPosition;
+		private System.Windows.Forms.ToolStripMenuItem btnSortOnLastName;
+		private System.Windows.Forms.ToolStripMenuItem btnSortOnLogin;
 		private System.Windows.Forms.ComboBox comboBoxColumns;
 	}
 }
