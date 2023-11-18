@@ -92,3 +92,27 @@ BEGIN
     RETURN OLD;
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE TRIGGER trg_delete_position
+    BEFORE DELETE ON Positions
+    FOR EACH ROW
+EXECUTE FUNCTION delete_position_trigger();
+
+CREATE OR REPLACE FUNCTION delete_employee_cascade()
+    RETURNS TRIGGER AS $$
+BEGIN
+    DELETE FROM TicketSales
+    WHERE EmployeeId = OLD.Id;
+
+    DELETE FROM Employees
+    WHERE Id = OLD.Id;
+
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_delete_employee_cascade
+    BEFORE DELETE ON UserCredentials
+    FOR EACH ROW
+EXECUTE FUNCTION delete_employee_cascade();
