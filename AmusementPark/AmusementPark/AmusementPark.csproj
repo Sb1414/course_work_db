@@ -121,6 +121,18 @@
     <Compile Include="View\BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Employees\EmployeesAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Employees\EmployeesAddForm.Designer.cs">
+      <DependentUpon>EmployeesAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Employees\EmployeesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Employees\EmployeesForm.Designer.cs">
+      <DependentUpon>EmployeesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +165,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Employees\EmployeesAddForm.resx">
+      <DependentUpon>EmployeesAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Employees\EmployeesForm.resx">
+      <DependentUpon>EmployeesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -225,6 +243,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\add position form.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\positions1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\employees.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add employees form.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

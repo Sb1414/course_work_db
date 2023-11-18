@@ -1,4 +1,5 @@
-﻿using AmusementPark.View.Positions;
+﻿using AmusementPark.View.Employees;
+using AmusementPark.View.Positions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -75,6 +76,12 @@ namespace AmusementPark
 		{
 			PositionsForm positions = new PositionsForm(connectionString);
 			positions.Show();
+		}
+
+		private void btnEmployees_Click(object sender, EventArgs e)
+		{
+			EmployeesForm employees = new EmployeesForm(connectionString);
+			employees.Show();
 		}
 	}
 }

@@ -67,6 +67,7 @@
 			this.btnEmployees.Size = new System.Drawing.Size(170, 37);
 			this.btnEmployees.TabIndex = 7;
 			this.btnEmployees.UseVisualStyleBackColor = false;
+			this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
 			this.btnEmployees.MouseLeave += new System.EventHandler(this.btnAttractions_MouseLeave);
 			this.btnEmployees.MouseHover += new System.EventHandler(this.btnEmployees_MouseHover);
 			// 
