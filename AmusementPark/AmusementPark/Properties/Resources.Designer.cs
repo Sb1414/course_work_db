@@ -63,6 +63,16 @@ namespace AmusementPark.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _base {
+            get {
+                object obj = ResourceManager.GetObject("base", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap add_atractions {
             get {
                 object obj = ResourceManager.GetObject("add_atractions", resourceCulture);

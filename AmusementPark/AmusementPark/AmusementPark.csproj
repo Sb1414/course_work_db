@@ -290,5 +290,8 @@
   <ItemGroup>
     <None Include="Resources\add tickets form %281%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\base.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

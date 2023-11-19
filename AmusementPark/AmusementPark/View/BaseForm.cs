@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -258,7 +259,193 @@ namespace AmusementPark
 
 		private void btnUpdate_Click(object sender, EventArgs e)
 		{
+			try
+			{
+				if (dataGridViewTickets.CurrentRow == null)
+				{
+					throw new Exception("Не выбран билет");
+				}
 
+				int id = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["TicketId"].Value);
+				DateTime date = Convert.ToDateTime(dataGridViewTickets.CurrentRow.Cells["PurchaseDate"].Value);
+				
+				BaseTicketAddForm addForm = new BaseTicketAddForm(connectionString, date, id);
+				if (addForm.ShowDialog() == DialogResult.OK)
+				{
+					DateTime addDate = addForm.PurchaseDate;
+					List<int> idAttractions = addForm.AttractionsId;
+
+					using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+					{
+						connection.Open();
+
+						string insertTicketQuery = "UPDATE Tickets SET EmployeeId = @EmployeeId, PurchaseDate = @PurchaseDate WHERE Id = @TicketId";
+						using (NpgsqlCommand command = new NpgsqlCommand(insertTicketQuery, connection))
+						{
+							command.Parameters.AddWithValue("@EmployeeId", usernameInfo.Item1);
+							Console.WriteLine("\ndate = " + addDate);
+							command.Parameters.AddWithValue("@PurchaseDate", addDate);
+							command.Parameters.AddWithValue("@TicketId", id);
+
+							if (idAttractions != null && idAttractions.Count > 0)
+							{
+								
+								using (NpgsqlCommand commandDel = new NpgsqlCommand("DELETE FROM TicketAttractions WHERE TicketId = @id", connection))
+								{
+									commandDel.Parameters.AddWithValue("@id", id);
+									commandDel.ExecuteNonQuery();
+								}
+								
+								string insertAttractionsQuery = "INSERT INTO TicketAttractions (TicketId, AttractionId) VALUES (@TicketId, @AttractionId)";
+								using (NpgsqlCommand attractionsCommand = new NpgsqlCommand(insertAttractionsQuery, connection))
+								{
+									attractionsCommand.Parameters.AddWithValue("@TicketId", id);
+
+									foreach (int attractionId in idAttractions)
+									{
+										string checkAttractionQuery = "SELECT COUNT(*) FROM Attractions WHERE Id = @AttractionId";
+										using (NpgsqlCommand checkCommand = new NpgsqlCommand(checkAttractionQuery, connection))
+										{
+											checkCommand.Parameters.AddWithValue("@AttractionId", attractionId);
+											int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+											if (count > 0)
+											{
+												attractionsCommand.Parameters.Clear();
+												attractionsCommand.Parameters.AddWithValue("@TicketId", id);
+												attractionsCommand.Parameters.AddWithValue("@AttractionId", attractionId);
+												attractionsCommand.ExecuteNonQuery();
+											}
+											else
+											{
+												Console.WriteLine($"\nтакого аттракциона нет {attractionId}");
+											}
+										}
+									}
+								}
+							}
+							LoadTickets();
+						}
+					}
+				}
+			} catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
+			}
 		}
+
+
+		private void btnRemoveTicket_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewTickets.CurrentRow == null)
+				{
+					throw new Exception("Не выбран билет");
+				}
+
+				int id = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["TicketId"].Value);
+
+				DialogResult res = MessageBox.Show("Точно удалить билет?", "Предупреждение", MessageBoxButtons.OKCancel);
+				if (res == DialogResult.OK)
+				{
+					using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+					{
+						connection.Open();
+
+						using (NpgsqlCommand command = new NpgsqlCommand("DELETE FROM Tickets WHERE id = @id", connection))
+						{
+							command.Parameters.AddWithValue("@id", id);
+
+							int rowsUpdated = command.ExecuteNonQuery();
+							if (rowsUpdated > 0)
+							{
+								LoadTickets();
+							}
+							else
+							{
+								MessageBox.Show("Ошибка удаления данных");
+							}
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
+			}
+		}
+
+		private void btnRemoveAttr_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewAttractions.CurrentRow == null)
+				{
+					throw new Exception("Не выбран аттракцион");
+				}
+
+				int id = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["TicketId"].Value);
+				Tuple<int, int> result = GetEmployeeAndAttractionIds(id);
+				int atrId = result.Item2;
+
+				DialogResult res = MessageBox.Show("Точно удалить аттракцион?", "Предупреждение", MessageBoxButtons.OKCancel);
+				if (res == DialogResult.OK)
+				{
+					using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+					{
+						connection.Open();
+
+						using (NpgsqlCommand command = new NpgsqlCommand("DELETE FROM TicketAttractions WHERE TicketId = @id AND AttractionID = @AttractionID", connection))
+						{
+							command.Parameters.AddWithValue("@id", id);
+							command.Parameters.AddWithValue("@AttractionID", atrId);
+
+							int rowsUpdated = command.ExecuteNonQuery();
+							if (rowsUpdated > 0)
+							{
+								LoadTickets();
+							}
+							else
+							{
+								MessageBox.Show("Ошибка удаления данных");
+							}
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
+			}
+		}
+
+		private Tuple<int, int> GetEmployeeAndAttractionIds(int ticketId)
+		{
+			using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+			{
+				connection.Open();
+
+				string query = "SELECT EmployeeId, AttractionId FROM TicketAttractions " +
+					"JOIN Tickets T on TicketAttractions.TicketId = T.Id" +
+					" WHERE TicketId = @TicketId";
+
+				using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@TicketId", ticketId);
+
+					using (NpgsqlDataReader reader = command.ExecuteReader())
+					{
+						if (reader.Read())
+						{
+							int employeeId = reader.GetInt32(0);
+							int attractionId = reader.GetInt32(1);
+							return Tuple.Create(employeeId, attractionId);
+						}
+					}
+				}
+			}
+			return null;
+		}
+
 	}
 }

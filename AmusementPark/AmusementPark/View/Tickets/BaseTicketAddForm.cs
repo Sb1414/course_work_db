@@ -31,6 +31,59 @@ namespace AmusementPark.View.Tickets
 			this.AcceptButton = buttonAdd;
 		}
 
+		public BaseTicketAddForm(string connectionString, DateTime date, int id)
+		{
+			this.connectionString = connectionString;
+			InitializeComponent();
+			FillAttractionDictionary();
+			CheckComboBoxAttractions(id);
+
+			dateTicket.Value = date;
+			dateTicket.Enabled = false;
+
+			buttonAdd.DialogResult = DialogResult.OK;
+
+			this.AcceptButton = buttonAdd;
+		}
+
+		private void CheckComboBoxAttractions(int ticketId)
+		{
+			checkedListBoxAttractions.ItemCheck -= CheckedListBoxAttractions_ItemCheck;
+
+			for (int i = 0; i < checkedListBoxAttractions.Items.Count; i++)
+			{
+				checkedListBoxAttractions.SetItemCheckState(i, CheckState.Unchecked);
+			}
+
+			using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+			{
+				connection.Open();
+
+				string query = "SELECT AttractionId FROM TicketAttractions WHERE TicketId = @TicketId";
+				using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@TicketId", ticketId);
+
+					using (NpgsqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							int attractionId = reader.GetInt32(0);
+							int index = attractionDictionary.Keys.ToList().IndexOf(attractionId);
+							if (index != -1)
+							{
+								selectedAttractionIds.Add(index);
+								checkedListBoxAttractions.SetItemCheckState(index, CheckState.Checked);
+							}
+						}
+					}
+				}
+			}
+
+			checkedListBoxAttractions.ItemCheck += CheckedListBoxAttractions_ItemCheck;
+		}
+
+
 		private void buttonClose_Click(object sender, EventArgs e)
 		{
 			this.Close();

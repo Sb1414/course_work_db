@@ -39,19 +39,12 @@
 			this.panelForTable = new System.Windows.Forms.Panel();
 			this.dataGridViewAttractions = new System.Windows.Forms.DataGridView();
 			this.dataGridViewTickets = new System.Windows.Forms.DataGridView();
-			this.textBoxSearch = new System.Windows.Forms.TextBox();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.btnInsert = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnUpdate = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnEditTicket = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnEditAttraction = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnRemoveTicket = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnRemoveAttr = new System.Windows.Forms.ToolStripMenuItem();
-			this.sort = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnSortOnName = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnSortOnPrice = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnSortOnCapacity = new System.Windows.Forms.ToolStripMenuItem();
 			this.labelSum = new System.Windows.Forms.ToolStripMenuItem();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.panelBack.SuspendLayout();
@@ -158,10 +151,9 @@
 			// panel2
 			// 
 			this.panel2.BackColor = System.Drawing.Color.Transparent;
-			this.panel2.BackgroundImage = global::AmusementPark.Properties.Resources.tickets;
+			this.panel2.BackgroundImage = global::AmusementPark.Properties.Resources._base;
 			this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.panel2.Controls.Add(this.panelForTable);
-			this.panel2.Controls.Add(this.textBoxSearch);
 			this.panel2.Controls.Add(this.menuStrip1);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(0, 27);
@@ -174,7 +166,7 @@
 			this.panelForTable.Controls.Add(this.dataGridViewAttractions);
 			this.panelForTable.Controls.Add(this.dataGridViewTickets);
 			this.panelForTable.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panelForTable.Location = new System.Drawing.Point(0, 28);
+			this.panelForTable.Location = new System.Drawing.Point(0, 30);
 			this.panelForTable.Name = "panelForTable";
 			this.panelForTable.Size = new System.Drawing.Size(969, 441);
 			this.panelForTable.TabIndex = 7;
@@ -206,16 +198,6 @@
 			this.dataGridViewTickets.TabIndex = 5;
 			this.dataGridViewTickets.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTickets_CellClick);
 			// 
-			// textBoxSearch
-			// 
-			this.textBoxSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(242)))), ((int)(((byte)(250)))));
-			this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxSearch.Location = new System.Drawing.Point(425, 526);
-			this.textBoxSearch.Name = "textBoxSearch";
-			this.textBoxSearch.Size = new System.Drawing.Size(481, 20);
-			this.textBoxSearch.TabIndex = 11;
-			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -223,11 +205,10 @@
             this.btnInsert,
             this.btnUpdate,
             this.btnDelete,
-            this.sort,
             this.labelSum});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(969, 28);
+			this.menuStrip1.Size = new System.Drawing.Size(969, 30);
 			this.menuStrip1.TabIndex = 5;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -240,25 +221,10 @@
 			// 
 			// btnUpdate
 			// 
-			this.btnUpdate.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnEditTicket,
-            this.btnEditAttraction});
 			this.btnUpdate.Name = "btnUpdate";
-			this.btnUpdate.Size = new System.Drawing.Size(92, 24);
-			this.btnUpdate.Text = "Изменить";
+			this.btnUpdate.Size = new System.Drawing.Size(149, 24);
+			this.btnUpdate.Text = "Изменить данные";
 			this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-			// 
-			// btnEditTicket
-			// 
-			this.btnEditTicket.Name = "btnEditTicket";
-			this.btnEditTicket.Size = new System.Drawing.Size(224, 26);
-			this.btnEditTicket.Text = "Данные о билете";
-			// 
-			// btnEditAttraction
-			// 
-			this.btnEditAttraction.Name = "btnEditAttraction";
-			this.btnEditAttraction.Size = new System.Drawing.Size(224, 26);
-			this.btnEditAttraction.Text = "Аттракцион";
 			// 
 			// btnDelete
 			// 
@@ -266,7 +232,7 @@
             this.btnRemoveTicket,
             this.btnRemoveAttr});
 			this.btnDelete.Name = "btnDelete";
-			this.btnDelete.Size = new System.Drawing.Size(79, 24);
+			this.btnDelete.Size = new System.Drawing.Size(152, 24);
 			this.btnDelete.Text = "Удалить";
 			// 
 			// btnRemoveTicket
@@ -274,40 +240,14 @@
 			this.btnRemoveTicket.Name = "btnRemoveTicket";
 			this.btnRemoveTicket.Size = new System.Drawing.Size(246, 26);
 			this.btnRemoveTicket.Text = "Билет";
+			this.btnRemoveTicket.Click += new System.EventHandler(this.btnRemoveTicket_Click);
 			// 
 			// btnRemoveAttr
 			// 
 			this.btnRemoveAttr.Name = "btnRemoveAttr";
 			this.btnRemoveAttr.Size = new System.Drawing.Size(246, 26);
 			this.btnRemoveAttr.Text = "Аттракцион из билета";
-			// 
-			// sort
-			// 
-			this.sort.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSortOnName,
-            this.btnSortOnPrice,
-            this.btnSortOnCapacity});
-			this.sort.Name = "sort";
-			this.sort.Size = new System.Drawing.Size(106, 24);
-			this.sort.Text = "Сортировка";
-			// 
-			// btnSortOnName
-			// 
-			this.btnSortOnName.Name = "btnSortOnName";
-			this.btnSortOnName.Size = new System.Drawing.Size(224, 26);
-			this.btnSortOnName.Text = "По должности";
-			// 
-			// btnSortOnPrice
-			// 
-			this.btnSortOnPrice.Name = "btnSortOnPrice";
-			this.btnSortOnPrice.Size = new System.Drawing.Size(224, 26);
-			this.btnSortOnPrice.Text = "По зарплате";
-			// 
-			// btnSortOnCapacity
-			// 
-			this.btnSortOnCapacity.Name = "btnSortOnCapacity";
-			this.btnSortOnCapacity.Size = new System.Drawing.Size(224, 26);
-			this.btnSortOnCapacity.Text = "По количеству";
+			this.btnRemoveAttr.Click += new System.EventHandler(this.btnRemoveAttr_Click);
 			// 
 			// labelSum
 			// 
@@ -368,20 +308,13 @@
 		private System.Windows.Forms.Panel panelForTable;
 		private System.Windows.Forms.DataGridView dataGridViewAttractions;
 		private System.Windows.Forms.DataGridView dataGridViewTickets;
-		private System.Windows.Forms.TextBox textBoxSearch;
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem btnInsert;
 		private System.Windows.Forms.ToolStripMenuItem btnUpdate;
-		private System.Windows.Forms.ToolStripMenuItem btnEditTicket;
-		private System.Windows.Forms.ToolStripMenuItem btnEditAttraction;
 		private System.Windows.Forms.ToolStripMenuItem btnDelete;
-		private System.Windows.Forms.ToolStripMenuItem btnRemoveTicket;
 		private System.Windows.Forms.ToolStripMenuItem btnRemoveAttr;
-		private System.Windows.Forms.ToolStripMenuItem sort;
-		private System.Windows.Forms.ToolStripMenuItem btnSortOnName;
-		private System.Windows.Forms.ToolStripMenuItem btnSortOnPrice;
-		private System.Windows.Forms.ToolStripMenuItem btnSortOnCapacity;
 		private System.Windows.Forms.ToolStripMenuItem labelSum;
 		private System.Windows.Forms.Label labelUsername;
+		private System.Windows.Forms.ToolStripMenuItem btnRemoveTicket;
 	}
 }
