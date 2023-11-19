@@ -31,16 +31,21 @@ namespace AmusementPark.View.Tickets
 
 			this.AcceptButton = buttonAdd;
 		}
-		public TicketsAddForm(string connectionString, Tuple<int, int> result, DateTime date, bool check)
+		public TicketsAddForm(string connectionString, Tuple<int, int> result, DateTime date, int check)
 		{
 			this.connectionString = connectionString;
 			InitializeComponent();
 			FillComboBoxEmployees();
 			FillComboBoxAttractions();
-			if (!check)
+			if (check == 1)
 			{
 				checkBoxEditDate.Enabled = false;
 				dateTicket.Enabled = false;
+				comboBoxEmployees.Enabled = false;
+			} 
+			else if (check == 2)
+			{
+				comboBoxAttractions.Enabled = false;
 			}
 
 			int idEmployees = result.Item1;
@@ -111,7 +116,7 @@ namespace AmusementPark.View.Tickets
 			{
 				connection.Open();
 
-				string query = "SELECT id, CONCAT(LastName, ' ', FirstName, ' ', MiddleName) AS Employee FROM Employees";
+				string query = "SELECT id, CONCAT(LastName, ' ', FirstName, ' ', MiddleName) AS Employee FROM Employees WHERE PositionID > 3";
 				using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
 				{
 					using (NpgsqlDataReader reader = command.ExecuteReader())

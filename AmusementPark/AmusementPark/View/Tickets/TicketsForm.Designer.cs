@@ -37,6 +37,8 @@
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.btnInsert = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnUpdate = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnEditTicket = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnEditAttraction = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.addAttraction = new System.Windows.Forms.ToolStripMenuItem();
 			this.sort = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +47,9 @@
 			this.btnSortOnCapacity = new System.Windows.Forms.ToolStripMenuItem();
 			this.panelUp = new System.Windows.Forms.Panel();
 			this.buttonClose = new System.Windows.Forms.Button();
+			this.btnRemoveTicket = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnRemoveAttr = new System.Windows.Forms.ToolStripMenuItem();
+			this.labelSum = new System.Windows.Forms.ToolStripMenuItem();
 			this.panelBack.SuspendLayout();
 			this.panelForTable.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewAttractions)).BeginInit();
@@ -136,7 +141,8 @@
             this.btnUpdate,
             this.btnDelete,
             this.addAttraction,
-            this.sort});
+            this.sort,
+            this.labelSum});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 27);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(955, 28);
@@ -152,15 +158,35 @@
 			// 
 			// btnUpdate
 			// 
+			this.btnUpdate.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnEditTicket,
+            this.btnEditAttraction});
 			this.btnUpdate.Name = "btnUpdate";
-			this.btnUpdate.Size = new System.Drawing.Size(136, 24);
-			this.btnUpdate.Text = "Изменить билет";
+			this.btnUpdate.Size = new System.Drawing.Size(92, 24);
+			this.btnUpdate.Text = "Изменить";
+			// 
+			// btnEditTicket
+			// 
+			this.btnEditTicket.Name = "btnEditTicket";
+			this.btnEditTicket.Size = new System.Drawing.Size(224, 26);
+			this.btnEditTicket.Text = "Данные о билете";
+			this.btnEditTicket.Click += new System.EventHandler(this.btnEditTicket_Click);
+			// 
+			// btnEditAttraction
+			// 
+			this.btnEditAttraction.Name = "btnEditAttraction";
+			this.btnEditAttraction.Size = new System.Drawing.Size(224, 26);
+			this.btnEditAttraction.Text = "Аттракцион";
+			this.btnEditAttraction.Click += new System.EventHandler(this.btnEditAttraction_Click);
 			// 
 			// btnDelete
 			// 
+			this.btnDelete.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnRemoveTicket,
+            this.btnRemoveAttr});
 			this.btnDelete.Name = "btnDelete";
-			this.btnDelete.Size = new System.Drawing.Size(123, 24);
-			this.btnDelete.Text = "Удалить билет";
+			this.btnDelete.Size = new System.Drawing.Size(79, 24);
+			this.btnDelete.Text = "Удалить";
 			// 
 			// addAttraction
 			// 
@@ -225,6 +251,27 @@
 			this.buttonClose.UseVisualStyleBackColor = true;
 			this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
 			// 
+			// btnRemoveTicket
+			// 
+			this.btnRemoveTicket.Name = "btnRemoveTicket";
+			this.btnRemoveTicket.Size = new System.Drawing.Size(246, 26);
+			this.btnRemoveTicket.Text = "Билет";
+			this.btnRemoveTicket.Click += new System.EventHandler(this.btnRemoveTicket_Click);
+			// 
+			// btnRemoveAttr
+			// 
+			this.btnRemoveAttr.Name = "btnRemoveAttr";
+			this.btnRemoveAttr.Size = new System.Drawing.Size(246, 26);
+			this.btnRemoveAttr.Text = "Аттракцион из билета";
+			this.btnRemoveAttr.Click += new System.EventHandler(this.btnRemoveAttr_Click);
+			// 
+			// labelSum
+			// 
+			this.labelSum.Enabled = false;
+			this.labelSum.Name = "labelSum";
+			this.labelSum.Size = new System.Drawing.Size(199, 24);
+			this.labelSum.Text = "Сумма по всем билетам: ";
+			// 
 			// TicketsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -266,5 +313,10 @@
 		private System.Windows.Forms.ComboBox comboBoxColumns;
 		private System.Windows.Forms.TextBox textBoxSearch;
 		private System.Windows.Forms.ToolStripMenuItem addAttraction;
+		private System.Windows.Forms.ToolStripMenuItem btnEditTicket;
+		private System.Windows.Forms.ToolStripMenuItem btnEditAttraction;
+		private System.Windows.Forms.ToolStripMenuItem btnRemoveTicket;
+		private System.Windows.Forms.ToolStripMenuItem btnRemoveAttr;
+		private System.Windows.Forms.ToolStripMenuItem labelSum;
 	}
 }
