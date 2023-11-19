@@ -167,7 +167,7 @@ namespace AmusementPark
 								break;
 
 							default:
-								BaseForm baseForm = new BaseForm();
+								BaseForm baseForm = new BaseForm(username);
 								baseForm.Show();
 								break;
 						}
