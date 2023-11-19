@@ -29,7 +29,11 @@ namespace AmusementPark
 
 		private void buttonClose_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			DialogResult res = MessageBox.Show("Действительно выйти из учетной записи?", "Предупреждение", MessageBoxButtons.OKCancel);
+			if (res == DialogResult.OK)
+			{
+				this.Close();
+			}
 		}
 
 		Point lastPoint;
@@ -286,6 +290,7 @@ namespace AmusementPark
 							Console.WriteLine("\ndate = " + addDate);
 							command.Parameters.AddWithValue("@PurchaseDate", addDate);
 							command.Parameters.AddWithValue("@TicketId", id);
+							command.ExecuteNonQuery();
 
 							if (idAttractions != null && idAttractions.Count > 0)
 							{

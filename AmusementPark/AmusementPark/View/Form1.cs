@@ -163,11 +163,19 @@ namespace AmusementPark
 							case "администратор":
 							case "директор":
 								AdminForm adminForm = new AdminForm();
+								adminForm.FormClosed += (s, args) => this.Show();
+								textBoxLogin.Clear();
+								textBoxPassword.Clear();
+								this.Hide();
 								adminForm.Show();
 								break;
 
 							default:
 								BaseForm baseForm = new BaseForm(username);
+								baseForm.FormClosed += (s, args) => this.Show();
+								textBoxLogin.Clear();
+								textBoxPassword.Clear();
+								this.Hide();
 								baseForm.Show();
 								break;
 						}
