@@ -19,44 +19,6 @@ CREATE TABLE Positions (
     Count INTEGER NOT NULL
 );
 
-CREATE TABLE Tickets (
-    Id SERIAL PRIMARY KEY,
-    PurchaseDate DATE NOT NULL,
-    AttractionID INTEGER NOT NULL,
-    FOREIGN KEY (AttractionID) REFERENCES Attractions(id)
-);
-
-ALTER TABLE tickets
-    DROP CONSTRAINT IF EXISTS tickets_attractionid_fkey;
-
--- Удаление таблицы
-DROP TABLE IF EXISTS tickets;
-
--- Создание таблицы заново
-CREATE TABLE Tickets (
-    Id SERIAL PRIMARY KEY,
-    PurchaseDate DATE NOT NULL,
-    AttractionID INTEGER NOT NULL,
-    FOREIGN KEY (AttractionID) REFERENCES Attractions(id) ON DELETE CASCADE
-);
-
--- 
--- ALTER TABLE tickets
---     ADD CONSTRAINT tickets_attractionid_fkey
---         FOREIGN KEY (AttractionID)
---             REFERENCES Attractions(id)
---             ON DELETE CASCADE;
-
-
-CREATE TABLE TicketAttractions (
-    TicketId INTEGER NOT NULL,
-    AttractionID INTEGER NOT NULL,
-    
-    PRIMARY KEY (TicketId, AttractionID),
-    FOREIGN KEY (TicketId) REFERENCES Tickets(Id),
-    FOREIGN KEY (AttractionID) REFERENCES Attractions(id)
-);
-
 CREATE TABLE Employees (
     Id SERIAL PRIMARY KEY,
     UserCredentialId INTEGER NOT NULL,
@@ -70,12 +32,19 @@ CREATE TABLE Employees (
     FOREIGN KEY (PositionID) REFERENCES Positions(Id)
 );
 
-CREATE TABLE TicketSales (
+CREATE TABLE Tickets (
     Id SERIAL PRIMARY KEY,
-    TicketId INTEGER NOT NULL,
+    PurchaseDate DATE NOT NULL,
     EmployeeId INTEGER NOT NULL,
-    SaleTime TIMESTAMP NOT NULL,
     
-    FOREIGN KEY (TicketId) REFERENCES Tickets(Id),
     FOREIGN KEY (EmployeeId) REFERENCES Employees(Id)
+);
+
+CREATE TABLE TicketAttractions (
+    TicketId INTEGER NOT NULL,
+    AttractionID INTEGER NOT NULL,
+    
+    PRIMARY KEY (TicketId, AttractionID),
+    FOREIGN KEY (TicketId) REFERENCES Tickets(Id),
+    FOREIGN KEY (AttractionID) REFERENCES Attractions(id)
 );

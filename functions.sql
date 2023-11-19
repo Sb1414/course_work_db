@@ -67,8 +67,6 @@ CREATE OR REPLACE FUNCTION delete_tickets_on_attraction_delete()
     RETURNS TRIGGER AS $$
 BEGIN
     DELETE FROM TicketAttractions WHERE AttractionID = OLD.id;
-    DELETE FROM TicketSales WHERE TicketId IN (SELECT Id FROM Tickets WHERE AttractionID = OLD.id);
-    DELETE FROM Tickets WHERE AttractionID = OLD.id;
 
     RETURN OLD;
 END;
@@ -102,7 +100,7 @@ EXECUTE FUNCTION delete_position_trigger();
 CREATE OR REPLACE FUNCTION delete_employee_cascade()
     RETURNS TRIGGER AS $$
 BEGIN
-    DELETE FROM TicketSales
+    DELETE FROM Tickets
     WHERE EmployeeId = OLD.Id;
 
     DELETE FROM Employees
@@ -116,3 +114,24 @@ CREATE TRIGGER trigger_delete_employee_cascade
     BEFORE DELETE ON UserCredentials
     FOR EACH ROW
 EXECUTE FUNCTION delete_employee_cascade();
+
+-- удаление из таблицы Tickets
+CREATE OR REPLACE FUNCTION delete_ticket_attractions()
+    RETURNS TRIGGER AS $$
+BEGIN
+    DELETE FROM TicketAttractions WHERE TicketId = OLD.Id;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER trigger_delete_ticket_attractions
+    AFTER DELETE ON Tickets
+    FOR EACH ROW
+EXECUTE FUNCTION delete_ticket_attractions();
+
+ALTER TABLE TicketAttractions
+    DROP CONSTRAINT IF EXISTS ticketattractions_ticketid_fkey;
+
+ALTER TABLE TicketAttractions
+    ADD CONSTRAINT ticketattractions_ticketid_fkey
+        FOREIGN KEY (TicketId) REFERENCES Tickets(Id) ON DELETE CASCADE;
