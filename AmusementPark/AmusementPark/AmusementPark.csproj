@@ -98,6 +98,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="View\AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,11 +233,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -294,13 +294,25 @@
     <None Include="Resources\tickets.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\add tickets form.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\add tickets form %281%29.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\base.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ticket print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ticket print %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ticket print1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ticket print2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ticket print3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

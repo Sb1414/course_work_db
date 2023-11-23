@@ -43,7 +43,7 @@
 			// panelBack
 			// 
 			this.panelBack.BackColor = System.Drawing.Color.Transparent;
-			this.panelBack.BackgroundImage = global::AmusementPark.Properties.Resources.add_tickets_form;
+			this.panelBack.BackgroundImage = global::AmusementPark.Properties.Resources.add_tickets_form__1_;
 			this.panelBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.panelBack.Controls.Add(this.comboBoxAttractions);
 			this.panelBack.Controls.Add(this.comboBoxEmployees);

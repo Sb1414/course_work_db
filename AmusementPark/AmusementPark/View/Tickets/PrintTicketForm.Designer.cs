@@ -29,12 +29,12 @@
 		private void InitializeComponent()
 		{
 			this.panelBack = new System.Windows.Forms.Panel();
+			this.labelAllPrice = new System.Windows.Forms.Label();
+			this.labelAttractions = new System.Windows.Forms.Label();
+			this.labelNameEmployee = new System.Windows.Forms.Label();
+			this.labelTicketDate = new System.Windows.Forms.Label();
 			this.panelUp = new System.Windows.Forms.Panel();
 			this.buttonClose = new System.Windows.Forms.Button();
-			this.labelTicketDate = new System.Windows.Forms.Label();
-			this.labelNameEmployee = new System.Windows.Forms.Label();
-			this.labelAttractions = new System.Windows.Forms.Label();
-			this.labelAllPrice = new System.Windows.Forms.Label();
 			this.panelBack.SuspendLayout();
 			this.panelUp.SuspendLayout();
 			this.SuspendLayout();
@@ -42,6 +42,7 @@
 			// panelBack
 			// 
 			this.panelBack.BackColor = System.Drawing.Color.Transparent;
+			this.panelBack.BackgroundImage = global::AmusementPark.Properties.Resources.ticket_print;
 			this.panelBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.panelBack.Controls.Add(this.labelAllPrice);
 			this.panelBack.Controls.Add(this.labelAttractions);
@@ -53,6 +54,38 @@
 			this.panelBack.Name = "panelBack";
 			this.panelBack.Size = new System.Drawing.Size(800, 450);
 			this.panelBack.TabIndex = 11;
+			// 
+			// labelAllPrice
+			// 
+			this.labelAllPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
+			this.labelAllPrice.Location = new System.Drawing.Point(151, 358);
+			this.labelAllPrice.Name = "labelAllPrice";
+			this.labelAllPrice.Size = new System.Drawing.Size(163, 32);
+			this.labelAllPrice.TabIndex = 5;
+			// 
+			// labelAttractions
+			// 
+			this.labelAttractions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
+			this.labelAttractions.Location = new System.Drawing.Point(89, 168);
+			this.labelAttractions.Name = "labelAttractions";
+			this.labelAttractions.Size = new System.Drawing.Size(520, 190);
+			this.labelAttractions.TabIndex = 4;
+			// 
+			// labelNameEmployee
+			// 
+			this.labelNameEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
+			this.labelNameEmployee.Location = new System.Drawing.Point(231, 390);
+			this.labelNameEmployee.Name = "labelNameEmployee";
+			this.labelNameEmployee.Size = new System.Drawing.Size(163, 23);
+			this.labelNameEmployee.TabIndex = 3;
+			// 
+			// labelTicketDate
+			// 
+			this.labelTicketDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelTicketDate.Location = new System.Drawing.Point(141, 86);
+			this.labelTicketDate.Name = "labelTicketDate";
+			this.labelTicketDate.Size = new System.Drawing.Size(163, 23);
+			this.labelTicketDate.TabIndex = 2;
 			// 
 			// panelUp
 			// 
@@ -81,38 +114,6 @@
 			this.buttonClose.TabIndex = 0;
 			this.buttonClose.UseVisualStyleBackColor = true;
 			this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-			// 
-			// labelTicketDate
-			// 
-			this.labelTicketDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelTicketDate.Location = new System.Drawing.Point(128, 99);
-			this.labelTicketDate.Name = "labelTicketDate";
-			this.labelTicketDate.Size = new System.Drawing.Size(163, 23);
-			this.labelTicketDate.TabIndex = 2;
-			// 
-			// labelNameEmployee
-			// 
-			this.labelNameEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-			this.labelNameEmployee.Location = new System.Drawing.Point(603, 418);
-			this.labelNameEmployee.Name = "labelNameEmployee";
-			this.labelNameEmployee.Size = new System.Drawing.Size(163, 23);
-			this.labelNameEmployee.TabIndex = 3;
-			// 
-			// labelAttractions
-			// 
-			this.labelAttractions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-			this.labelAttractions.Location = new System.Drawing.Point(128, 177);
-			this.labelAttractions.Name = "labelAttractions";
-			this.labelAttractions.Size = new System.Drawing.Size(307, 141);
-			this.labelAttractions.TabIndex = 4;
-			// 
-			// labelAllPrice
-			// 
-			this.labelAllPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-			this.labelAllPrice.Location = new System.Drawing.Point(128, 418);
-			this.labelAllPrice.Name = "labelAllPrice";
-			this.labelAllPrice.Size = new System.Drawing.Size(163, 23);
-			this.labelAllPrice.TabIndex = 5;
 			// 
 			// PrintTicketForm
 			// 
