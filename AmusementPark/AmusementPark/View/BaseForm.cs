@@ -452,5 +452,23 @@ namespace AmusementPark
 			return null;
 		}
 
+		private void printTicket_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewTickets.CurrentRow == null)
+				{
+					throw new Exception("Не выбран билет");
+				}
+
+				int id = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["TicketId"].Value);
+				PrintTicketForm printForm = new PrintTicketForm(connectionString, id);
+				printForm.ShowDialog();							
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
+			}
+		}
 	}
 }

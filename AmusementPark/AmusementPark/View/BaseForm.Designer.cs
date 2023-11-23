@@ -29,12 +29,6 @@
 		private void InitializeComponent()
 		{
 			this.panelBack = new System.Windows.Forms.Panel();
-			this.btnEmployees = new System.Windows.Forms.Button();
-			this.btnPositions = new System.Windows.Forms.Button();
-			this.btnTickets = new System.Windows.Forms.Button();
-			this.btnAttractions = new System.Windows.Forms.Button();
-			this.panelUp = new System.Windows.Forms.Panel();
-			this.labelUsername = new System.Windows.Forms.Label();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.panelForTable = new System.Windows.Forms.Panel();
 			this.dataGridViewAttractions = new System.Windows.Forms.DataGridView();
@@ -45,15 +39,22 @@
 			this.btnDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnRemoveTicket = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnRemoveAttr = new System.Windows.Forms.ToolStripMenuItem();
+			this.printTicket = new System.Windows.Forms.ToolStripMenuItem();
 			this.labelSum = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnEmployees = new System.Windows.Forms.Button();
+			this.btnPositions = new System.Windows.Forms.Button();
+			this.btnTickets = new System.Windows.Forms.Button();
+			this.btnAttractions = new System.Windows.Forms.Button();
+			this.panelUp = new System.Windows.Forms.Panel();
+			this.labelUsername = new System.Windows.Forms.Label();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.panelBack.SuspendLayout();
-			this.panelUp.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panelForTable.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewAttractions)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewTickets)).BeginInit();
 			this.menuStrip1.SuspendLayout();
+			this.panelUp.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panelBack
@@ -71,6 +72,122 @@
 			this.panelBack.Name = "panelBack";
 			this.panelBack.Size = new System.Drawing.Size(969, 652);
 			this.panelBack.TabIndex = 7;
+			// 
+			// panel2
+			// 
+			this.panel2.BackColor = System.Drawing.Color.Transparent;
+			this.panel2.BackgroundImage = global::AmusementPark.Properties.Resources._base;
+			this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.panel2.Controls.Add(this.panelForTable);
+			this.panel2.Controls.Add(this.menuStrip1);
+			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel2.Location = new System.Drawing.Point(0, 27);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(969, 625);
+			this.panel2.TabIndex = 9;
+			// 
+			// panelForTable
+			// 
+			this.panelForTable.Controls.Add(this.dataGridViewAttractions);
+			this.panelForTable.Controls.Add(this.dataGridViewTickets);
+			this.panelForTable.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panelForTable.Location = new System.Drawing.Point(0, 30);
+			this.panelForTable.Name = "panelForTable";
+			this.panelForTable.Size = new System.Drawing.Size(969, 441);
+			this.panelForTable.TabIndex = 7;
+			// 
+			// dataGridViewAttractions
+			// 
+			this.dataGridViewAttractions.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+			this.dataGridViewAttractions.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.dataGridViewAttractions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridViewAttractions.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dataGridViewAttractions.Location = new System.Drawing.Point(548, 0);
+			this.dataGridViewAttractions.Name = "dataGridViewAttractions";
+			this.dataGridViewAttractions.RowHeadersWidth = 51;
+			this.dataGridViewAttractions.RowTemplate.Height = 24;
+			this.dataGridViewAttractions.Size = new System.Drawing.Size(421, 441);
+			this.dataGridViewAttractions.TabIndex = 6;
+			// 
+			// dataGridViewTickets
+			// 
+			this.dataGridViewTickets.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+			this.dataGridViewTickets.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.dataGridViewTickets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridViewTickets.Dock = System.Windows.Forms.DockStyle.Left;
+			this.dataGridViewTickets.Location = new System.Drawing.Point(0, 0);
+			this.dataGridViewTickets.Name = "dataGridViewTickets";
+			this.dataGridViewTickets.RowHeadersWidth = 51;
+			this.dataGridViewTickets.RowTemplate.Height = 24;
+			this.dataGridViewTickets.Size = new System.Drawing.Size(548, 441);
+			this.dataGridViewTickets.TabIndex = 5;
+			this.dataGridViewTickets.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTickets_CellClick);
+			// 
+			// menuStrip1
+			// 
+			this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnInsert,
+            this.btnUpdate,
+            this.btnDelete,
+            this.printTicket,
+            this.labelSum});
+			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+			this.menuStrip1.Name = "menuStrip1";
+			this.menuStrip1.Size = new System.Drawing.Size(969, 30);
+			this.menuStrip1.TabIndex = 5;
+			this.menuStrip1.Text = "menuStrip1";
+			// 
+			// btnInsert
+			// 
+			this.btnInsert.Name = "btnInsert";
+			this.btnInsert.Size = new System.Drawing.Size(122, 26);
+			this.btnInsert.Text = "Создать билет";
+			this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
+			// 
+			// btnUpdate
+			// 
+			this.btnUpdate.Name = "btnUpdate";
+			this.btnUpdate.Size = new System.Drawing.Size(149, 26);
+			this.btnUpdate.Text = "Изменить данные";
+			this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+			// 
+			// btnDelete
+			// 
+			this.btnDelete.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnRemoveTicket,
+            this.btnRemoveAttr});
+			this.btnDelete.Name = "btnDelete";
+			this.btnDelete.Size = new System.Drawing.Size(79, 26);
+			this.btnDelete.Text = "Удалить";
+			// 
+			// btnRemoveTicket
+			// 
+			this.btnRemoveTicket.Name = "btnRemoveTicket";
+			this.btnRemoveTicket.Size = new System.Drawing.Size(246, 26);
+			this.btnRemoveTicket.Text = "Билет";
+			this.btnRemoveTicket.Click += new System.EventHandler(this.btnRemoveTicket_Click);
+			// 
+			// btnRemoveAttr
+			// 
+			this.btnRemoveAttr.Name = "btnRemoveAttr";
+			this.btnRemoveAttr.Size = new System.Drawing.Size(246, 26);
+			this.btnRemoveAttr.Text = "Аттракцион из билета";
+			this.btnRemoveAttr.Click += new System.EventHandler(this.btnRemoveAttr_Click);
+			// 
+			// printTicket
+			// 
+			this.printTicket.Name = "printTicket";
+			this.printTicket.Size = new System.Drawing.Size(151, 26);
+			this.printTicket.Text = "Распечатать билет";
+			this.printTicket.Click += new System.EventHandler(this.printTicket_Click);
+			// 
+			// labelSum
+			// 
+			this.labelSum.Enabled = false;
+			this.labelSum.Name = "labelSum";
+			this.labelSum.Size = new System.Drawing.Size(199, 26);
+			this.labelSum.Text = "Сумма по всем билетам: ";
 			// 
 			// btnEmployees
 			// 
@@ -148,114 +265,6 @@
 			this.labelUsername.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelUp_MouseDown);
 			this.labelUsername.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelUp_MouseMove);
 			// 
-			// panel2
-			// 
-			this.panel2.BackColor = System.Drawing.Color.Transparent;
-			this.panel2.BackgroundImage = global::AmusementPark.Properties.Resources._base;
-			this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.panel2.Controls.Add(this.panelForTable);
-			this.panel2.Controls.Add(this.menuStrip1);
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(0, 27);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(969, 625);
-			this.panel2.TabIndex = 9;
-			// 
-			// panelForTable
-			// 
-			this.panelForTable.Controls.Add(this.dataGridViewAttractions);
-			this.panelForTable.Controls.Add(this.dataGridViewTickets);
-			this.panelForTable.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panelForTable.Location = new System.Drawing.Point(0, 30);
-			this.panelForTable.Name = "panelForTable";
-			this.panelForTable.Size = new System.Drawing.Size(969, 441);
-			this.panelForTable.TabIndex = 7;
-			// 
-			// dataGridViewAttractions
-			// 
-			this.dataGridViewAttractions.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-			this.dataGridViewAttractions.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.dataGridViewAttractions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridViewAttractions.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridViewAttractions.Location = new System.Drawing.Point(548, 0);
-			this.dataGridViewAttractions.Name = "dataGridViewAttractions";
-			this.dataGridViewAttractions.RowHeadersWidth = 51;
-			this.dataGridViewAttractions.RowTemplate.Height = 24;
-			this.dataGridViewAttractions.Size = new System.Drawing.Size(421, 441);
-			this.dataGridViewAttractions.TabIndex = 6;
-			// 
-			// dataGridViewTickets
-			// 
-			this.dataGridViewTickets.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-			this.dataGridViewTickets.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.dataGridViewTickets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridViewTickets.Dock = System.Windows.Forms.DockStyle.Left;
-			this.dataGridViewTickets.Location = new System.Drawing.Point(0, 0);
-			this.dataGridViewTickets.Name = "dataGridViewTickets";
-			this.dataGridViewTickets.RowHeadersWidth = 51;
-			this.dataGridViewTickets.RowTemplate.Height = 24;
-			this.dataGridViewTickets.Size = new System.Drawing.Size(548, 441);
-			this.dataGridViewTickets.TabIndex = 5;
-			this.dataGridViewTickets.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTickets_CellClick);
-			// 
-			// menuStrip1
-			// 
-			this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnInsert,
-            this.btnUpdate,
-            this.btnDelete,
-            this.labelSum});
-			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(969, 30);
-			this.menuStrip1.TabIndex = 5;
-			this.menuStrip1.Text = "menuStrip1";
-			// 
-			// btnInsert
-			// 
-			this.btnInsert.Name = "btnInsert";
-			this.btnInsert.Size = new System.Drawing.Size(122, 24);
-			this.btnInsert.Text = "Создать билет";
-			this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
-			// 
-			// btnUpdate
-			// 
-			this.btnUpdate.Name = "btnUpdate";
-			this.btnUpdate.Size = new System.Drawing.Size(149, 24);
-			this.btnUpdate.Text = "Изменить данные";
-			this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-			// 
-			// btnDelete
-			// 
-			this.btnDelete.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnRemoveTicket,
-            this.btnRemoveAttr});
-			this.btnDelete.Name = "btnDelete";
-			this.btnDelete.Size = new System.Drawing.Size(152, 24);
-			this.btnDelete.Text = "Удалить";
-			// 
-			// btnRemoveTicket
-			// 
-			this.btnRemoveTicket.Name = "btnRemoveTicket";
-			this.btnRemoveTicket.Size = new System.Drawing.Size(246, 26);
-			this.btnRemoveTicket.Text = "Билет";
-			this.btnRemoveTicket.Click += new System.EventHandler(this.btnRemoveTicket_Click);
-			// 
-			// btnRemoveAttr
-			// 
-			this.btnRemoveAttr.Name = "btnRemoveAttr";
-			this.btnRemoveAttr.Size = new System.Drawing.Size(246, 26);
-			this.btnRemoveAttr.Text = "Аттракцион из билета";
-			this.btnRemoveAttr.Click += new System.EventHandler(this.btnRemoveAttr_Click);
-			// 
-			// labelSum
-			// 
-			this.labelSum.Enabled = false;
-			this.labelSum.Name = "labelSum";
-			this.labelSum.Size = new System.Drawing.Size(199, 24);
-			this.labelSum.Text = "Сумма по всем билетам: ";
-			// 
 			// buttonClose
 			// 
 			this.buttonClose.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -283,7 +292,6 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "baseForm";
 			this.panelBack.ResumeLayout(false);
-			this.panelUp.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
 			this.panelForTable.ResumeLayout(false);
@@ -291,6 +299,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewTickets)).EndInit();
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			this.panelUp.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -316,5 +325,6 @@
 		private System.Windows.Forms.ToolStripMenuItem labelSum;
 		private System.Windows.Forms.Label labelUsername;
 		private System.Windows.Forms.ToolStripMenuItem btnRemoveTicket;
+		private System.Windows.Forms.ToolStripMenuItem printTicket;
 	}
 }
